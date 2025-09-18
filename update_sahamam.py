@@ -47,4 +47,4 @@ def update_stock_prices():
 if __name__ == "__main__":
     print("⏳ Update harga saham...")
     update_stock_prices()
-    print("✅ Selesai.\n")
+    print("✅ Selesai.\n"
