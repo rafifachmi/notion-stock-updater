@@ -1,0 +1,28 @@
+name: Update Notion Stock Prices
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"   # jalan tiap 20 menit
+  workflow_dispatch:         # bisa run manual juga
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install --no-cache-dir yfinance pandas notion-client pytz
+
+      - name: Run script
+        run: python update_saham.py
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
